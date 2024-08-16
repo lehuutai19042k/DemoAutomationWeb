@@ -50,7 +50,7 @@ public class TestDemo extends BaseSetup {
 
         dasboardPage.selectAndCurrency();
         //dasboardPage.verifySearchCurrency();
-//        dasboardPage.selectAndDefaultLanguage();
+        dasboardPage.selectAndDefaultLanguage();
 
         dasboardPage.selectFillCountry();
 
