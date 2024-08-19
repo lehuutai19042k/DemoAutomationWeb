@@ -75,11 +75,11 @@ public class SignInPage {
             System.out.println("False");
     }
 
-    public DasboardPage loginCRM(String email, String password) {
+    public DashboardPage loginCRM(String email, String password) {
         setEmail(email);
         setPassword(password);
         clickLoginButton();
-        return new DasboardPage(driver);
+        return new DashboardPage(driver);
     }
 }
 

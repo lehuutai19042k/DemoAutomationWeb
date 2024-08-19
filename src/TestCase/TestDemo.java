@@ -1,10 +1,15 @@
 package TestCase;
 
 import Base.BaseSetup;
-import Page.DasboardPage;
+import Page.CustomerDetails;
+import Page.CustomersPage;
+import Page.DashboardPage;
 import Page.SignInPage;
+
 public class TestDemo extends BaseSetup {
-    static DasboardPage dasboardPage;
+    static DashboardPage dasboardPage;
+    static CustomersPage customersPage;
+    static CustomerDetails customerDetails;
     public static void main(String[] args) throws Exception {
         Setup();
         SignInPage signInPage = new SignInPage(driver);
@@ -14,48 +19,49 @@ public class TestDemo extends BaseSetup {
         signInPage.checkButtonLogin();
         dasboardPage = signInPage.loginCRM("admin@example.com", "123456");
 
+        dasboardPage.verifyDashboard();
         dasboardPage.verifyCustomers();
-        dasboardPage.clickCustomer();
-        dasboardPage.verifyNewCustomer();
-        dasboardPage.NewCustomer();
-        dasboardPage.verifyCustomerDetails();
-        dasboardPage.verifyCompany();
-        dasboardPage.verifyVATNumber();
-        dasboardPage.verifyPhone();
-        dasboardPage.verifyWebsite();
-        dasboardPage.verifyGroups();
-        dasboardPage.verifyButtonAddNewGroup();
-        dasboardPage.verifyCurrency();
-        dasboardPage.verifyDefaultLanguage();
-        dasboardPage.verifyAddress();
-        dasboardPage.verifyCity();
-        dasboardPage.verifyState();
-        dasboardPage.verifyZipCode();
-        dasboardPage.verifyCountry();
-        dasboardPage.verifySave();
-        dasboardPage.verifySaveAndContact();
-        dasboardPage.fillCustomer("ATH","1065623","03125536","https://nhadat.com","Thu Duc",
+
+        customersPage = dasboardPage.CustomerPage();
+        customersPage.verifyCustomerPage();
+        customersPage.verifyCustomersIsEnable();
+        customersPage.verifyNewCustomer();
+
+        customerDetails = customersPage.NewCustomer();
+        customerDetails.verifyCustomerDetails();
+        customerDetails.verifyCompany();
+        customerDetails.verifyVATNumber();
+        customerDetails.verifyPhone();
+        customerDetails.verifyWebsite();
+        customerDetails.verifyGroups();
+        customerDetails.verifyButtonAddNewGroup();
+        customerDetails.verifyCurrency();
+        customerDetails.verifyDefaultLanguage();
+        customerDetails.verifyAddress();
+        customerDetails.verifyCity();
+        customerDetails.verifyState();
+        customerDetails.verifyZipCode();
+        customerDetails.verifyCountry();
+        customerDetails.verifySave();
+        customerDetails.verifySaveAndContact();
+        customerDetails.fillCustomer("ATH","1065623","03125536","https://nhadat.com","Thu Duc",
                 "Ho Chi Minh City","Độc thân", "125656");
-
-        dasboardPage.checkfillGroups();
-        dasboardPage.verifySearchGroups();
-        dasboardPage.verifySelectAll();
-        dasboardPage.verifyDeselectAll();
-
-        dasboardPage.addGroup("Automation2");
-        dasboardPage.verifyTitleAddNewGroup();
-        dasboardPage.verifyFillNameAddNewGroup();
-        dasboardPage.verifySaveNameAddNewGroup();
-        dasboardPage.verifyCloseNameAddNewGroup();
-
-        dasboardPage.selectAndCurrency();
-        //dasboardPage.verifySearchCurrency();
-        dasboardPage.selectAndDefaultLanguage();
-
-        dasboardPage.selectFillCountry();
-
-
-        dasboardPage.setSave();
+        customerDetails.nhanvaoGroups();
+        customerDetails.verifySearchGroups();
+        customerDetails.verifySelectAll();
+        customerDetails.verifyDeselectAll();
+        customerDetails.fillelement();
+        customerDetails.addGroup("Automation2");
+        customerDetails.verifyTitleAddNewGroup();
+        customerDetails.verifyFillNameAddNewGroup();
+        customerDetails.verifySaveNameAddNewGroup();
+        customerDetails.verifyCloseNameAddNewGroup();
+        customerDetails.selectAndCurrency();
+        customerDetails.selectAndDefaultLanguage();
+        customerDetails.nhanvaoCountry();
+        customerDetails.verifySearchCountry();
+        customerDetails.fillelementCountry();
+        customerDetails.setSave();
 
         TearDown();
     }

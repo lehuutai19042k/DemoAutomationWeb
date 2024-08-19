@@ -1,27 +1,31 @@
 package Page;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class DasboardPage {
+public class CustomerDetails {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public DasboardPage(WebDriver driver) {
+    // Constructor
+    public CustomerDetails(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+    // Xử lý các Locator 
+
     //Customer
-    private By customers = By.xpath("//*[@id=\"side-menu\"]/li[3]/a/span");
+
 
     // 1. new customer
-    private By newCustomer = By.xpath("//*[@id=\"wrapper\"]/div/div/div/div[1]/a[1]/i");
+
 
     // 1.1
     //private By customerDetails = By.xpath("//*[@data-toggle='tab' and @aria-controls='contact_info']");
@@ -29,7 +33,6 @@ public class DasboardPage {
     // 1.1.1 field Company
     private By inputCompany = By.xpath("//*[@id='company' ]");
     private By company = By.xpath("//*[@for='company' ]");
-    private By reportFieldCompany = By.xpath("//*[@id='company-error' ]");
 
     // 1.1.2 field VAT Number
     private By VATNumber = By.xpath("//*[@for='vat' ]");
@@ -48,70 +51,51 @@ public class DasboardPage {
     private By dropdownGroups = By.xpath("//*[@title='Nothing selected' and @data-id='groups_in[]']");
 
     // search Groups
+    private By elementSearchGroups = By.xpath("/html/body/div[3]/div/div/div[3]/div/div[1]/div/div/div[1]/form/div[2]/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div/div[1]/input");
     private By searchGroups = By.xpath("//*[@id=\"bs-select-1-0\"]");
     private By selectAll = By.xpath("//*[@id=\"contact_info\"]/div/div[2]/div[6]/div/div[1]/div/div[2]/div/button[1]");
     private By deselectAll = By.xpath("//*[@id=\"contact_info\"]/div/div[2]/div[6]/div/div[1]/div/div[2]/div/button[2]");
-    // lựa chọn dùng vòng for để lấy x.path và thay đổi lựa chọn dựa vào thẻ li[] ở cuối x.path
-    private By select = By.xpath("/html/body/div[3]/div/div/div[3]/div/div[1]/div/div/div[1]/form/div[2]/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div/div[3]/ul/li[1]");
 
     // thêm mới addgroups
     private By addGroups = By.xpath("//*[@class='fa fa-plus']");
     private By addGroupsTitle = By.xpath("//*[@class='add-title']");
     private By inputAddGroups = By.xpath("//input[@id='name']");
-    private By textDanger = By.xpath("//*[@id='name-error']");
     private By close = By.xpath("//*[@group='button' and @class='btn btn-default']");
     private By save = By.xpath("//*[@group='submit' and @class='btn btn-primary']");
 
     // 1.1.6 dropdown Currency
-    private By currency = By.xpath("//*[@for='default_currency']");
     private By systemDefaultCurrency = By.xpath("//*[@id=\"contact_info\"]/div/div[2]/div[7]/div[1]/div/div/button/div/div/div");
-    private By searchCurrency = By.xpath("//*[@id=\"contact_info\"]/div/div[2]/div[7]/div[1]/div/div/div/div[1]/input");
     // sử dụng vòng for để lựa chọn từng phần tử dựa vào thẻ li[1]
     private By selectCurrency = By.xpath("//*[@id=\"bs-select-2-1\"]");
 
     // dropdown Default Language
-    private By defaultLanguage = By.xpath("//*[@for='default_language']");
     private By systemDefaultLanguage = By.xpath("//*[@id=\"contact_info\"]/div/div[2]/div[7]/div[2]/div/div/button");
     // select ngôn ngữ Việt Nam
     private By selectLanguage = By.xpath("//*[@id=\"bs-select-3-21\"]");
 
     // 1.1.7 field Address
-    private By address = By.xpath("//*[@for='address']");
     private By inputAddress = By.xpath("//*[@name='address']");
 
     // 1.1.8 field City
-    private By city = By.xpath("//*[@for='city']");
     private By inputCity = By.xpath("//*[@name='city']");
 
     // 1.1.9 field State
-    private By state = By.xpath("//*[@for='state']");
     private By inputState = By.xpath("//*[@name='state']");
 
     // 1.1.10 Zip code
-    private By zipCode = By.xpath("//*[@for='zip']");
     private By inputZipCode = By.xpath("//*[@name='zip']");
 
     // 1.1.11 Dropdown Country
-    private By country = By.xpath("//*[@for='country']");
     private By nothingSelect = By.xpath("//*[@id=\"contact_info\"]/div/div[2]/div[12]/div/button/div/div/div");
     private By searchCountry = By.xpath("//*[@id=\"bs-select-4-243\"]");
-    // chọn quốc gia Việt Nam
-    private By selectCountry = By.xpath("//*[@id=\"bs-select-4\"]/ul/li[244]");
+    private By elementSearchCountry = By.xpath("/html/body/div[3]/div/div/div[3]/div/div[1]/div/div/div[1]/form/div[2]/div[2]/div[1]/div/div[2]/div[12]/div/div/div[1]/input");
 
     // 1.1.12 Save
     private By saveAndContact = By.xpath("//*[@id=\"profile-save-section\"]/button[1]");
     private By saveAndSave = By.xpath("//*[@id=\"profile-save-section\"]/button[2]");
 
+    // Xử lý các hàm click, sendKeys
 
-    // Xử lý các hàm click
-    private void clickCustomers(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(customers));
-        driver.findElement(customers).click();
-    }
-    private void clickNewCustomer(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(newCustomer));
-        driver.findElement(newCustomer).click();
-    }
     private void Company(String Company){
         wait.until(ExpectedConditions.visibilityOfElementLocated(inputCompany));
         driver.findElement(inputCompany).sendKeys(Company);
@@ -139,15 +123,6 @@ public class DasboardPage {
     private void clickSaveNewGroup(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(save));
         driver.findElement(save).click();
-    }
-
-    private void clickGroups(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownGroups));
-        driver.findElement(dropdownGroups).click();
-    }
-    private void Groups(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(searchGroups));
-        driver.findElement(searchGroups).click();
     }
     private void Currency(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(systemDefaultCurrency));
@@ -181,41 +156,13 @@ public class DasboardPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(inputZipCode));
         driver.findElement(inputZipCode).sendKeys(fillZip);
     }
-    private void Country(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(nothingSelect));
-        driver.findElement(nothingSelect).click();
-    }
-    private void FillCountry(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(searchCountry));
-        driver.findElement(searchCountry).click();
-    }
     private void clickSave(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(saveAndSave));
         driver.findElement(saveAndSave).click();
     }
 
+    // Hàm verify
 
-
-
-
-    // verify
-
-    public void verifyCustomers(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(customers));
-        if (driver.findElement(customers).isDisplayed() && driver.findElement(customers).getText().trim().equals("Customers")){
-            System.out.println("True");
-        }else {
-            System.out.println("False");
-        }
-    }
-    public void verifyNewCustomer() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(newCustomer));
-        if (driver.findElement(newCustomer).isEnabled()) {
-            System.out.println("Có nút New Customer");
-        } else {
-            System.out.println("Không có nút New Customer");
-        }
-    }
     public void verifyCustomerDetails(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(customerDetails));
         if (driver.findElement(customerDetails).getText().trim().equals("Customer Details")){
@@ -336,14 +283,6 @@ public class DasboardPage {
             System.out.println("Dropdown Currency chưa có");
         }
     }
-   /* public void verifySearchCurrency(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(searchCurrency));
-        if (driver.findElement(searchCurrency).isDisplayed()){
-            System.out.println("Search Currency đã có");
-        }else {
-            System.out.println("Search Currency chưa có");
-        }
-    }*/
     public void verifyDefaultLanguage(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(systemDefaultLanguage));
         if (driver.findElement(systemDefaultLanguage).isEnabled()){
@@ -416,12 +355,9 @@ public class DasboardPage {
             System.out.println("Button Save And Contact chưa xuất hiện");
         }
     }
-    public void clickCustomer(){
-        clickCustomers();
-    }
-    public void NewCustomer(){
-        clickNewCustomer();
-    }
+
+    // Hàm xử lý các sự kiện
+
     public void fillCustomer(String company, String VAT, String phone, String web, String fillAddress,
                              String fillCity, String fillState, String fillZipCode){
         Company(company);
@@ -434,11 +370,16 @@ public class DasboardPage {
         State(fillState);
         ZipCode(fillZipCode);
     }
-    public void checkfillGroups(){
-        clickGroups();
-        Groups();
+    public void nhanvaoGroups(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownGroups));
+        driver.findElement(dropdownGroups).click();
     }
-
+    public  void fillelement(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(elementSearchGroups));
+        driver.findElement(elementSearchGroups).sendKeys("Automation");
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Keys.ENTER).build().perform();
+    }
     public void addGroup(String newgroup){
         clickAddGroups();
         addNewGroups(newgroup);
@@ -452,9 +393,15 @@ public class DasboardPage {
         DefaultLanguage();
         selectDefaultLanguage();
     }
-    public void selectFillCountry(){
-        Country();
-        FillCountry();
+    public void nhanvaoCountry(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(nothingSelect));
+        driver.findElement(nothingSelect).click();
+    }
+    public void fillelementCountry() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(elementSearchCountry));
+        driver.findElement(elementSearchCountry).sendKeys("Vietnam");
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Keys.ENTER).build().perform();
     }
     public void setSave(){
         clickSave();

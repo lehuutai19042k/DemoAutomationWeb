@@ -7,6 +7,11 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseSetup {
     protected static WebDriver driver;
+
+    //hàm lấy Url để verify xem đã ở một trang nào đó chưa
+    //    driver.getCurrentUrl();
+
+
     public static void Setup(){
         System.setProperty("webdriver.chrome.driver", "D:\\Webdriver\\chromedriver.exe");
         driver = new ChromeDriver();
